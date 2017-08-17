@@ -263,6 +263,43 @@ Toper mpm::ParticleCloudMpm< MPM_ITEMS, PARTICLE_TYPE >::iterateOverParticles(
               </pre>
             </section>
 
+            <!-- Material Point Method -->
+            <section>
+              <h2>Particle</h2>
+              <pre>
+              <code class="cpp">
+//------------------------------------------------------------------------------
+// \brief class for soil particles
+// \details Includes basic calculations for particles
+// \tparam MPM_ITEMS   the main template file which includes all the classes
+
+template < typename MPM_ITEMS >
+class mpm::ParticleSoilMpm : public mpm::ParticleMpm< MPM_ITEMS > {
+
+  protected:
+  using ParticleType::id_;        // identifiying particle number
+  using ParticleType::coord_;     // coordinates
+  using ParticleType::sfunc_;     // shape functions
+  using ParticleType::dsfuncDX_;  // gradient shape function
+  using ParticleType::ePtrOfP_;   // pointer to the element which has particle
+  using ParticleType::nodesOfParticle_;  // nodes of element in which particle is in
+
+  double mass_;                          //!< mass of particle (constant)
+  double density_;           // phase averaged density of soil (=(1-n)density)
+  double porosity_;          // porosity of particle
+  double phi_;               // friction angle of soil (initial stress calc)
+  MaterialPtr material_;     // Pointer to material object
+  VecDof velocity_;          // velocity
+  VecDof acceleration_;      // acceleration
+  Vec6x1 strain_;            // strain
+  Vec6x1 dStrain_;           // change of strain in a time step
+  Vec6x1 stress_;            // stress
+;
+}
+              </code>
+              </pre>
+            </section>
+            
             <!-- Thank you! -->
             <section>
               <h1> Thank you!! </h1>
