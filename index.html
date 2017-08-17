@@ -66,39 +66,223 @@
               </section>
             </section>
 
-            <!-- Aerial landslides -->
+            <!-- Numerical methods -->
             <section>
-              <section>
-                <h2>Global landslide hazard</h2>
-                <figure>
-                  <img style="border:0;" src="images/landslide-deaths.png" width="100%">
-                  <figcaption>
-                    Fatalities due to landslides, 2007 - 2013 (Source: Nasa, 2015).
-                  </figcaption>
-                </figure> 
-              </section>
-  
-              <!-- Thank you! -->
-              <section>
-                <h1> Thank you!! </h1>
-                <p>
-                  <br/> Krishna Kumar, <a href="mailto:kks32@cam.ac.uk">kks32@cam.ac.uk</a>
-                </p>
-                <br/>
-                <br/><br/>
+              <h3>Cambridge-Berkeley Computational Geomechanics</h3>
+              <ul>
+                <li> Lattice-Boltzmann + Discrete Element Method </li>
+                <li> Finite Element Method - Thermo-Hydro Mechanical Coupling</li>
+                <li> Material Point Method </li>
+                <li> Lattice Element Method </li>
+              </ul>
+              <figure>
+                <img src="images/themes/cb-geo.png" width ="100%">
+                <figcaption><a href="http://www.cb-geo.com">View the CB-Geo website for 
+                    more information and software tools</a></figcaption>
+              </figure>
+            </section>
 
-                <div style="float: left; width: 100%;">
-                  <span style="float: left; width: 33%; text-align: center;">
-                    <img style="border:0;" src="images/themes/cued.png" width="100%">
-                  </span>
-                  <span style="float: left; width: 33%; text-align: center;">
-                    <img style="border:0;" src="images/themes/cb-geo-text-white.png" width="100%">
-                  </span>
-                  <span style="float: right; width: 33%; text-align: center;">
-                    <img style="border:0;" src="images/themes/berkeley.png" width="100%">
-                  </span>
-                </div>
-              </section>
+            <!-- Effect of slope -->
+            <section>
+              <h3>LBM-DEM simulation of an underwater collapse</h3>
+              <br/>
+              <video  width="100%" controls loop>
+                <source src="media/a6_slope5.webm" type="video/webm">
+  	          Your browser does not support the video tag.
+              </video>
+              <br/>
+              <br/>aspect ratio 'a' of 6 on a slope of 5*<br />
+            </section>
+
+
+            <!-- Mesh based vs Mesh-free approach -->
+            <section>
+              <h2>Mesh-based vs Mesh-free techniques</h2>
+	      <figure>
+	        <img src="images/continuum_approaches.png" width="100%">
+	      </figure>                  
+            </section>
+            
+            <!-- Material Point Method -->
+            <section>
+              <h2>Material Point Method</h2>
+	      <figure>
+	        <img src="images/mpm_soil.png" width="100%">
+	        <figcaption style = "font-size: 80%; text-align: center; ">
+		  Porosity in MPM </figcaption>
+	      </figure>
+            </section>
+
+            
+            <!-- Material Point Method -->
+            <section>
+              <h2>Material Point Method</h2>
+              <div style="float: left; width: 40%;">
+	        <figure>
+	        <img src="images/mpm_flowchart.png" width="100%">
+                </figure>
+	      </div>
+              <div style="float: left; width: 60%;">
+	        <figure>
+		  <img src="images/mpm_algorithm.png" width="100%">
+		</figure>
+	      </div>
+            </section>
+
+            <!-- MPM slope -->
+            <section>
+              <h2>MPM slope failure</h2>
+              <video  width="100%" autoplay controls loop>
+                <source src="media/mpm_100j.webm" type="video/webm">
+                  Your browser does not support the video tag.
+              </video>
+            </section>
+
+            <section>
+              <h2>MPM slope failure: pore pressure changes</h2>
+              <video  width="100%" autoplay controls loop>
+                <source src="media/selborne.webm" type="video/webm">
+                  Your browser does not support the video tag.
+              </video>
+              <p>Selborne case study (Alonso et al., 2016)</p>
+            </section>
+
+            
+            <section>
+              <h2>MPM submarine landslide</h2>
+              <video  width="80%" autoplay controls loop>
+                <source src="media/mpm-submarine-landslide.webm" type="video/webm">
+                  Your browser does not support the video tag.
+              </video>
+              <p>(Taka., 2012)</p>
+            </section>
+
+            <!-- Material Point Method -->
+            <section>
+              <h2>Material Point Method: Implementation</h2>
+              <div style="float: left; width: 50%;">
+                <ul>
+                  <li>Generic templatised C++11/14 code</li>
+                  <li>2D/3D MPM Code</li>
+	          <li>Elements: Quadrilateral and Hexahedron</li>
+                  <li>Shared memory / thread parallelisation</li>
+                  <li>BLAS matrix algebra</li>
+                  <li>Visualisation VTK</li>
+                  <li>Material models: ILE, MC, CamClay, Bingham</li>
+                </ul>
+	      </div>
+              <div style="float: left; width: 50%;">
+                <ul>
+                  <li>FE Base library</li>
+	          <ul>
+                    <li>Mesh class</li>
+                    <li>Solver class</li>
+                    <li>Assembler class</li>
+                    <li>MPI parallelisation</li>
+	            <li>PETSc matrix algebra / solver</li>
+                  </ul>
+	          <li>FE THM coupling</li>
+	          <li>HDF5 support</li>
+	          <li>GMSH meshing</li>
+	          <li>Two-phase and Two-point formulation</li>
+                </ul>
+	      </div>
+            </section>
+
+            <!-- Material Point Method -->
+            <section>
+              <h2>C++ Factory implementation</h2>
+              <pre>
+              <code class="cpp">
+	        void MyElementFactory::RegisterFactoryFunction(
+ 	        std::string name, std::function<Element*(void)> classFactoryFunction) {
+                  // register the class factory function
+                    factoryFunctionRegistry[name] = classFactoryFunction;
+                  }
+                  std::shared_ptr<Element> MyElementFactory::Create(std::string name) {
+                    Element *instance = nullptr;
+
+                    // find name in the registry and call factory method.
+                    auto it = factoryFunctionRegistry.find(name);
+                    if (it != factoryFunctionRegistry.end())
+                    instance = it->second();
+
+                    // wrap instance in a shared ptr and return
+                    if (instance != nullptr)
+                      return std::shared_ptr<Element>(instance);
+                    else
+                      return nullptr;
+                  }
+              </code>
+              </pre>
+            </section>
+
+            <!-- Material Point Method -->
+            <section>
+              <h2>MPM main (snippet)</h2>
+              <pre>
+              <code class="cpp">
+// locate particles in mesh
+mesh.locateParticlesAndElements(particleCloudSoilPtr);
+
+// calculate and store shape functions and gradient shape functions
+particleCloudSoil.iterateOverParticles(
+  boost::bind(&SoilParticleType::evaluateShpfunAndGradShpfunHorMesh, _1));
+
+// calculate nodal acceleration
+particleCloudSoil.iterateOverParticles(
+  boost::bind(&SoilParticleType::assignForceToNodes, _1));
+
+mesh.iterateOverNodesOfSoilP(
+  boost::bind(&NodeType::computeSoilAcceleration, _1, dt, boundaryMiu));
+              </code>
+              </pre>
+            </section>
+            
+            <!-- Material Point Method -->
+            <section>
+              <h2>Iterate over particle</h2>
+              <pre>
+              <code class="cpp">
+//------------------------------------------------------------------------------
+// Apply a given functor to all particles making use of std::for_each
+// \tparam Toper          Type of the particle operation
+// \tparam MPM_ITEMS      MPM Handles
+// \tparam PARTICLE_TYPE  Type of particle
+// \param[in|out] oper    Specific operation applied to all particles
+// \retval Toper          for_each returns the operator
+
+template <typename MPM_ITEMS, typename PARTICLE_TYPE>
+template <typename Toper>
+Toper mpm::ParticleCloudMpm<MPM_ITEMS, PARTICLE_TYPE>::iterateOverParticles(
+    Toper oper) {
+  tbb::parallel_for_each(particles_.begin(), particles_.end(),
+                         oper);
+}
+              </code>
+              </pre>
+            </section>
+
+            <!-- Thank you! -->
+            <section>
+              <h1> Thank you!! </h1>
+              <p>
+                <br/> Krishna Kumar, <a href="mailto:kks32@cam.ac.uk">kks32@cam.ac.uk</a>
+              </p>
+              <br/>
+              <br/><br/>
+
+              <div style="float: left; width: 100%;">
+                <span style="float: left; width: 33%; text-align: center;">
+                  <img style="border:0;" src="images/themes/cued.png" width="100%">
+                </span>
+                <span style="float: left; width: 33%; text-align: center;">
+                  <img style="border:0;" src="images/themes/cb-geo-text-white.png" width="100%">
+                </span>
+                <span style="float: right; width: 33%; text-align: center;">
+                  <img style="border:0;" src="images/themes/berkeley.png" width="100%">
+                </span>
+              </div>
             </section>
             <!-- Special thanks to Chitra atthai! -->
         </div>
