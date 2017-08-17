@@ -252,9 +252,9 @@ mesh.iterateOverNodesOfSoilP(
 // \param[in|out] oper    Specific operation applied to all particles
 // \retval Toper          for_each returns the operator
 
-template <typename MPM_ITEMS, typename PARTICLE_TYPE>
-template <typename Toper>
-Toper mpm::ParticleCloudMpm<MPM_ITEMS, PARTICLE_TYPE>::iterateOverParticles(
+template < typename MPM_ITEMS, typename PARTICLE_TYPE >
+template < typename Toper >
+Toper mpm::ParticleCloudMpm< MPM_ITEMS, PARTICLE_TYPE >::iterateOverParticles(
     Toper oper) {
   tbb::parallel_for_each(particles_.begin(), particles_.end(),
                          oper);
